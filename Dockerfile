@@ -23,19 +23,19 @@ RUN apk add --no-cache nginx \
     && addgroup -S appgroup \
     && adduser -S appuser -G appgroup \
     && mkdir -p \
-    /usr/share/nginx/html \
-    /tmp/client_temp \
-    /tmp/proxy_temp \
-    /tmp/fastcgi_temp \
-    /tmp/uwsgi_temp \
-    /tmp/scgi_temp \
+       /usr/share/nginx/html \
+       /tmp/client_temp \
+       /tmp/proxy_temp \
+       /tmp/fastcgi_temp \
+       /tmp/uwsgi_temp \
+       /tmp/scgi_temp \
     && chown -R appuser:appgroup \
-    /usr/share/nginx/html \
-    /tmp/client_temp \
-    /tmp/proxy_temp \
-    /tmp/fastcgi_temp \
-    /tmp/uwsgi_temp \
-    /tmp/scgi_temp
+       /usr/share/nginx/html \
+       /tmp/client_temp \
+       /tmp/proxy_temp \
+       /tmp/fastcgi_temp \
+       /tmp/uwsgi_temp \
+       /tmp/scgi_temp
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
@@ -48,7 +48,7 @@ HEALTHCHECK --interval=30s \
     --timeout=5s \
     --start-period=10s \
     --retries=3 \
-    CMD wget -q -O /dev/null http://127.0.0.1:3999/health || exit 1
+    CMD wget -q -O /dev/null http://127.0.0.1:3000/health || exit 1
 
 USER appuser
 
