@@ -18,17 +18,17 @@ pipeline {
                 checkout scm
 
                 script {
-                    def shortSha = sh(
-                        script: 'git rev-parse --short HEAD',
-                        returnStdout: true
-                    ).trim()
+                        def shortSha = sh(
+                            script: 'git rev-parse --short HEAD',
+                            returnStdout: true
+                        ).trim()
 
-                    env.IMAGE_TAG = "${BUILD_NUMBER}-${shortSha}"
+                        env.IMAGE_TAG = "${env.BUILD_NUMBER}-${shortSha}"
 
-                    echo "Build Number : ${BUILD_NUMBER}"
-                    echo "Git SHA      : ${shortSha}"
-                    echo "Image Tag    : ${IMAGE_TAG}"
-                }
+                        echo "Build Number : ${env.BUILD_NUMBER}"
+                        echo "Git SHA      : ${shortSha}"
+                        echo "Image Tag    : ${env.IMAGE_TAG}"
+                    }
             }
         }
 
@@ -218,15 +218,15 @@ pipeline {
     post {
 
         success {
-            echo """
-            ========================================
-            DEPLOYMENT SUCCESSFUL
+                echo """
+                ========================================
+                DEPLOYMENT SUCCESSFUL
 
-            Image:
-            ${DOCKER_REPO}:${IMAGE_TAG}
-            ========================================
-            """
-        }
+                Image:
+                ${env.DOCKER_REPO}:${env.IMAGE_TAG}
+                ========================================
+                """
+            }
 
         failure {
             script {
