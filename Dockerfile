@@ -23,19 +23,19 @@ RUN apk add --no-cache nginx \
     && addgroup -S appgroup \
     && adduser -S appuser -G appgroup \
     && mkdir -p \
-       /usr/share/nginx/html \
-       /tmp/client_temp \
-       /tmp/proxy_temp \
-       /tmp/fastcgi_temp \
-       /tmp/uwsgi_temp \
-       /tmp/scgi_temp \
+    /usr/share/nginx/html \
+    /tmp/client_temp \
+    /tmp/proxy_temp \
+    /tmp/fastcgi_temp \
+    /tmp/uwsgi_temp \
+    /tmp/scgi_temp \
     && chown -R appuser:appgroup \
-       /usr/share/nginx/html \
-       /tmp/client_temp \
-       /tmp/proxy_temp \
-       /tmp/fastcgi_temp \
-       /tmp/uwsgi_temp \
-       /tmp/scgi_temp
+    /usr/share/nginx/html \
+    /tmp/client_temp \
+    /tmp/proxy_temp \
+    /tmp/fastcgi_temp \
+    /tmp/uwsgi_temp \
+    /tmp/scgi_temp
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
@@ -52,4 +52,4 @@ HEALTHCHECK --interval=30s \
 
 USER appuser
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-e", "/dev/stderr", "-g", "daemon off;"]
